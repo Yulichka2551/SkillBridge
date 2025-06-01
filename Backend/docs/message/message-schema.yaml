@@ -1,0 +1,53 @@
+definitions:
+  messages:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/messageWithAuthor'
+      count:
+        type: integer
+        description: Total number of messages
+  messageBody:
+    type: object
+    properties:
+      text:
+        type: string
+  message:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      authorRole:
+        type: string
+        enum:
+          - student
+          - tutor
+      text:
+        type: string
+      chat:
+        type: string
+      clearedFor:
+        type: array
+        items:
+          type: object
+          properties:
+            user:
+              type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  messageWithAuthor:
+    type: object
+    allOf:
+      - $ref: '#/definitions/message'
+      - properties:
+          author:
+            type: object
+            $ref: '#/definitions/user'

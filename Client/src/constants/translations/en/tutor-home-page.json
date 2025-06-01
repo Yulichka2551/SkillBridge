@@ -1,0 +1,17 @@
+{
+  "findStudentBlock": {
+    "title": {
+      "tutor": "A Global Network of Students"
+    },
+    "description": {
+      "tutor": "A SkillBridge platform is the best place where you can teach.\nType who or what would you like to teach and find students for that."
+    },
+    "label": "Who or what do you want to teach?",
+    "button": "Find student"
+  },
+  "popularCategories": {
+    "title": "Popular Categories",
+    "description": "Explore tutoring categories you're passionate about.",
+    "viewMore": "View more"
+  }
+}

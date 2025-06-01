@@ -1,0 +1,177 @@
+definitions:
+  offers:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: string
+        price:
+          type: number
+        proficiencyLevel:
+          $ref: '#/definitions/offerProficiencyLevelValues'
+        title:
+          type: string
+        description:
+          type: string
+        languages:
+          $ref: '#/definitions/offerLanguagesValues'
+        authorRole:
+          type: string
+        author:
+          $ref: '#/definitions/offerAuthorExtended'
+        enrolledUsers:
+          type: array
+          items:
+            type: string
+        subject:
+          $ref: '#/definitions/subjectWithName'
+        category:
+          $ref: '#/definitions/categoryWithAppearance'
+        status:
+          type: string
+          enum:
+            - active
+            - draft
+            - closed
+        FAQ:
+          $ref: '#/definitions/FAQ'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        chatId:
+          type: string
+          nullable: true
+  offerBody:
+    type: object
+    properties:
+      price:
+        type: number
+      proficiencyLevel:
+        $ref: '#/definitions/offerProficiencyLevelValues'
+      title:
+        type: string
+      description:
+        type: string
+      languages:
+        $ref: '#/definitions/offerLanguagesValues'
+      authorRole:
+        type: string
+      enrolledUsers:
+        type: array
+        items:
+          type: string
+      subject:
+        type: string
+      category:
+        type: string
+      status:
+        type: string
+        enum:
+          - active
+          - draft
+          - closed
+      FAQ:
+        $ref: '#/definitions/FAQ'
+  offer:
+    type: object
+    properties:
+      _id:
+        type: string
+      price:
+        type: number
+      proficiencyLevel:
+        $ref: '#/definitions/offerProficiencyLevelValues'
+      title:
+        type: string
+      description:
+        type: string
+      languages:
+        $ref: '#/definitions/offerLanguagesValues'
+      authorRole:
+        type: string
+      author:
+        $ref: '#/definitions/offerAuthor'
+      enrolledUsers:
+        type: array
+        items:
+          type: string
+      subject:
+        $ref: '#/definitions/subjectWithName'
+      category:
+        $ref: '#/definitions/categoryWithAppearance'
+      status:
+        type: string
+        enum:
+          - active
+          - draft
+          - closed
+      FAQ:
+        $ref: '#/definitions/FAQ'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      chatId:
+        type: string
+        nullable: true
+  proficiencyLevelEnum:
+    type: string
+    enum:
+      - Beginner
+      - Intermediate
+      - Advanced
+      - Test Preparation
+      - Professional
+      - Specialized
+  offerProficiencyLevelValues:
+    type: array
+    items:
+      $ref: '#/definitions/proficiencyLevelEnum'
+  offerLanguagesValues:
+    type: array
+    items:
+      $ref: '#/definitions/userSpokenLanguagesEnum'
+  offerAuthor:
+    type: object
+    properties:
+      _id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      totalReviews:
+        $ref: '#/definitions/userTotalReviews'
+      averageRating:
+        $ref: '#/definitions/userAverageRating'
+      photo:
+        type: string
+      professionalSummary:
+        type: string
+  offerAuthorExtended:
+    type: object
+    properties:
+      _id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      totalReviews:
+        $ref: '#/definitions/userTotalReviews'
+      averageRating:
+        $ref: '#/definitions/userAverageRating'
+      nativeLanguage:
+        $ref: '#/definitions/userSpokenLanguagesEnum'
+      status:
+        $ref: '#/definitions/userStatusEnum'
+      photo:
+        type: string
+      professionalSummary:
+        type: string

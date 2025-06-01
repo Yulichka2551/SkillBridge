@@ -1,0 +1,61 @@
+import { useTranslation } from 'react-i18next'
+import { Box, Typography } from '@mui/material'
+import HashLink from '~/components/hash-link/HashLink'
+
+import { useModalContext } from '~/context/modal-context'
+import { guestRoutes } from '~/router/constants/guestRoutes'
+import LoginDialog from '~/containers/guest-home-page/login-dialog/LoginDialog'
+import GoogleButton from '~/containers/guest-home-page/google-button/GoogleButton'
+
+import { styles } from '~/containers/guest-home-page/google-login/GoogleLogin.styles'
+import { UserRole } from '~/types'
+
+interface GoogleLoginProps {
+  type: 'signup' | 'login'
+  buttonWidth: string
+  role: UserRole
+}
+
+const GoogleLogin: React.FC<GoogleLoginProps> = ({
+  type,
+  buttonWidth,
+  role
+}) => {
+  const { t, i18n } = useTranslation()
+  const { whatCanYouDo } = guestRoutes.navBar
+  const { openModal, closeModal } = useModalContext()
+
+  const openLoginDialog = () => {
+    closeModal()
+    setTimeout(() => openModal({ component: <LoginDialog /> }), 0)
+  }
+
+  const currentLanguage = i18n.language
+
+  return (
+    <Box sx={styles.googleForm}>
+      <Box sx={styles.linesBox}>
+        <Typography sx={styles.continue} variant='body2'>
+          {t(`${type}.continue`)}
+        </Typography>
+      </Box>
+
+      <GoogleButton
+        buttonWidth={buttonWidth}
+        role={role}
+        route={whatCanYouDo.path}
+        type={type}
+      />
+      <Box
+        sx={{
+          ...styles.haveAccount,
+          ...(currentLanguage === 'uk' && type !== 'signup'
+            ? styles.haveAccountUa
+            : {})
+        }}
+      ></Box>
+    </Box>
+  )
+}
+
+export default GoogleLogin

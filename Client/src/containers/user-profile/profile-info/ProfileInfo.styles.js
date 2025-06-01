@@ -1,0 +1,120 @@
+import palette from '~/styles/app-theme/app.pallete'
+import { TypographyVariantEnum } from '~/types'
+
+export const styles = {
+  container: {
+    position: 'relative',
+    color: 'primary.900',
+    display: { sm: 'flex' },
+    justifyContent: 'space-around',
+    gap: { sm: '30px', lg: '50px' },
+    mb: '50px',
+    maxHeight: { sm: '525px' }
+  },
+  img: {
+    width: '100%',
+    height: '100%',
+    minWidth: '150px',
+    minHeight: '150px',
+    borderRadius: '15px',
+    fontSize: '110px'
+  },
+  infoWrapper: {
+    maxWidth: { sm: '345px', lg: '552px' },
+    width: '100%'
+  },
+  iconBtn: {
+    position: 'absolute',
+    color: 'black',
+    fontFamily: 'Montserrat, sans-serif',
+    fontSize: '16px !important',
+    borderRadius: '20px',
+    top: 0,
+    right: 0,
+    backgroundColor: ' #847BFF !important'
+  },
+  chipsWrapper: {
+    py: '16px'
+  },
+  schoolIcon: {
+    pl: '5px',
+    fill: palette.primary[500]
+  },
+  accInfoWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    gap: '20px 10px',
+    py: { xs: '10px', lg: '25px' }
+  },
+  buttonGroup: {
+    display: 'flex',
+    position: 'sticky',
+    flexDirection: { xs: 'column', sm: 'row' },
+    gap: { xs: 1, md: 3 },
+    width: '100%',
+    minWidth: { sm: '313px' },
+    top: '100%',
+    pt: '20px'
+  },
+  ratingIcon: {
+    position: 'relative',
+    top: '3px',
+    color: 'basic.yellow',
+    width: { xs: '18px', md: '24px' },
+    height: { xs: '18px', md: '24px' }
+  },
+  titleWithDescription: {
+    wrapper: {
+      textAlign: 'left',
+      pr: '20px'
+    },
+    title: {
+      typography: { xs: 'button', sm: 'h5', md: 'h4' },
+      mb: 1
+    },
+    description: {
+      typography: { xs: 'body2', md: 'button' }
+    }
+  },
+  doneIcon: {
+    color: 'basic.orientalHerbs'
+  },
+  profileTitleComp: {
+    wrapper: {
+      textAlign: 'center'
+    },
+    title: {
+      typography: { md: 'h5' }
+    },
+    description: {
+      typography: 'overline'
+    }
+  },
+  wrapperForPhoto: {
+    display: 'flex',
+    gap: '10px'
+  },
+  avatarContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    minWidth: '150px !important',
+    maxWidth: '300px !important',
+    minHeight: '270px !important',
+    borderRadius: '50% !important'
+  },
+
+  avatarContainerMobile: { flex: 1 },
+  linkToReviews: { color: 'primary.900' },
+  appRating: {
+    starMobile: {
+      height: { sm: '18px', md: '24px' }
+    },
+    rating: {
+      typography: { sm: TypographyVariantEnum.H6, md: TypographyVariantEnum.H5 }
+    },
+    reviews: {
+      typography: TypographyVariantEnum.Overline
+    }
+  }
+}

@@ -1,0 +1,495 @@
+paths:
+  /offers:
+    get:
+      security:
+        - cookieAuth: []
+      tags:
+        - Offers
+      summary: Find all offers
+      description: Finds and returns an array with a list of all offers.
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: authorRole
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: price
+          schema:
+            type: array
+            items:
+              type: integer
+          required: false
+        - in: query
+          name: proficiencyLevel
+          schema:
+            type: array
+            items:
+              type: string
+          required: false
+        - in: query
+          name: rating
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: language
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: languages
+          schema:
+            type: array
+            items:
+              type: string
+          required: false
+        - in: query
+          name: excludedOfferId
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: sort
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: skip
+          schema:
+            type: integer
+          required: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/offers'
+              example:
+                count: 2
+                items:
+                  - _id: 666c2ecf89ff51666ab11a4a
+                    price: 300
+                    proficiencyLevel: [Intermediate]
+                    title: Advanced English Course
+                    description: A comprehensive English course for intermediate learners.
+                    languages: [English, Ukrainian]
+                    authorRole: tutor
+                    author:
+                      _id: 666c26bd89ff51666ab119d2
+                      firstName: John
+                      lastName: Doe
+                      totalReviews:
+                        student: 0
+                        tutor: 0
+                      averageRating:
+                        student: 0
+                        tutor: 0
+                      nativeLanguage: Ukrainian
+                      status:
+                        student: active
+                        tutor: active
+                        admin: active
+                      photo: 1718364085578-What-is-landscape-photography.jpg
+                      professionalSummary: Experienced tutor with 10 years of experience in language teaching.
+                    enrolledUsers: []
+                    subject:
+                      _id: 65660fbbcb972798c401a9b4
+                      name: English
+                    category:
+                      _id: 64884f4dfdc2d1a130c24ac6
+                      appearance:
+                        icon: mocked-path-to-icon
+                        color: '#F67C41'
+                    status: active
+                    FAQ:
+                      - question: What is the course duration?
+                        answer: The course lasts for 8 weeks.
+                        _id: 666c2ecf89ff51666ab11a4b
+                      - question: Are there any prerequisites?
+                        answer: Basic English knowledge is required.
+                        _id: 666c2ecf89ff51666ab11a4c
+                    createdAt: 2024-06-14T11:51:43.406Z
+                    updatedAt: 2024-06-14T13:45:22.406Z
+                    chatId: null
+                  - _id: 666c2ecf89ff51666ab11a4b
+                    price: 350
+                    proficiencyLevel: [Advanced]
+                    title: Data Science with Python
+                    description: An advanced course on data science techniques using Python.
+                    languages: [English]
+                    authorRole: tutor
+                    author:
+                      _id: 666c26bd89ff51666ab119d5
+                      firstName: Jane
+                      lastName: Doe
+                      totalReviews:
+                        student: 0
+                        tutor: 0
+                      averageRating:
+                        student: 0
+                        tutor: 0
+                      nativeLanguage: English
+                      status:
+                        student: active
+                        tutor: active
+                        admin: active
+                      photo: 1718364095578-What-is-landscape-photography.jpg
+                      professionalSummary: Data scientist with extensive experience in machine learning.
+                    enrolledUsers: []
+                    subject:
+                      _id: 65660fbbcb972798c401a9b8
+                      name: Data Science
+                    category:
+                      _id: 64884f4dfdc2d1a130c24ad6
+                      appearance:
+                        icon: mocked-path-to-icon
+                        color: '#F67C31'
+                    status: active
+                    FAQ:
+                      question: Is prior programming experience necessary?
+                      answer: Yes, basic Python knowledge is recommended.
+                      _id: 666c2ecf89ff51666ab11a4d
+                    createdAt: 2024-07-12T11:51:43.406Z
+                    updatedAt: 2024-07-14T13:45:22.406Z
+                    chatId: null
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+    post:
+      security:
+        - cookieAuth: []
+      tags:
+        - Offers
+      summary: Create new offer.
+      description: Creates and saves a new offer to the database.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        description: Create new offer.
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/offerBody'
+            example:
+              price: 300
+              proficiencyLevel: [Beginner]
+              title: Introduction to Web Development
+              description: A beginner-friendly course to learn the basics of web development.
+              languages: [English, Ukrainian]
+              enrolledUsers: []
+              subject: 66758f4059019cd05eb11a94
+              category: 64884fedfdc2d1a130c24ade
+              status: active
+              FAQ: []
+
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/offer'
+              example:
+                price: 300
+                proficiencyLevel: [Beginner]
+                title: Introduction to Web Development
+                description: A beginner-friendly course to learn the basics of web development.
+                languages: [English, Ukrainian]
+                authorRole: tutor
+                enrolledUsers: []
+                subject: 66758f4059019cd05eb11a94
+                category: 64884fedfdc2d1a130c24ade
+                status: active
+                FAQ: []
+                _id: 676b4147a966dba1a48b8081
+                createdAt: 2024-12-24T23:18:31.432Z
+                updatedAt: 2024-12-24T23:18:31.432Z
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 403
+                code: FORBIDDEN
+                message: You do not have permission to perform this action.
+  /offers/{id}:
+    get:
+      security:
+        - cookieAuth: []
+      tags:
+        - Offers
+      summary: Find and return offer by ID
+      description: Finds and returns a offer with the specified ID.
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the offer that needs to be fetched
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/offer'
+              example:
+                _id: 63ec1cd51e9d781cdb6f4b14
+                price: 300
+                proficiencyLevel: [Advanced]
+                title: Advanced English Course
+                description: A comprehensive English course for intermediate learners.
+                languages: [English, Ukrainian]
+                authorRole: tutor
+                author:
+                  _id: 63e63bb04d1bf3bea00e3d88
+                  firstName: John
+                  lastName: Doe
+                  totalReviews:
+                    student: 0
+                    tutor: 0
+                  averageRating:
+                    student: 0
+                    tutor: 0
+                  photo: 1718364095578-What-is-landscape-photography.jpg
+                  professionalSummary: Data scientist with extensive experience in machine learning.
+                enrolledUsers: [6512e1ca5fd987b6ce926c2e]
+                subject:
+                  _id: 65660fbbcb972798c401a9b4
+                  name: English
+                category:
+                  _id: 64884f4dfdc2d1a130c24ac6
+                  appearance:
+                    icon: mocked-path-to-icon
+                    color: '#F67C41'
+                status: active
+                FAQ:
+                  - question: What is the course duration?
+                    answer: The course lasts for 8 weeks.
+                    _id: 666c2ecf89ff51666ab11a4b
+                  - question: Are there any prerequisites?
+                    answer: Basic English knowledge is required.
+                    _id: 666c2ecf89ff51666ab11a4c
+                createdAt: 2024-06-14T11:51:43.406Z
+                updatedAt: 2024-06-14T13:45:22.406Z
+                chatId: null
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        404:
+          description: Not Found Offer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Offer with the specified id was not found.
+        405:
+          description: Not Found Category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 405
+                code: CATEGORY_NOT_FOUND
+                message: Category with provided id was not found.
+        406:
+          description: Not Found Subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 406
+                code: SUBJECT_NOT_FOUND
+                message: Subject with the specified id was not found.
+    patch:
+      security:
+        - cookieAuth: []
+      tags:
+        - Offers
+      summary: Find and update offer by ID
+      description: Updates an offer with the specified ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the offer that needs to be updated
+          type: string
+      requestBody:
+        required: true
+        description: Provide required data to update an offer
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/offer'
+            example:
+              price: 300
+              proficiencyLevel: [Advanced]
+              title: Advanced English Course
+              description: A comprehensive English course for intermediate learners.
+              languages: [Ukrainian, Polish]
+              enrolledUsers: [6512e1ca5fd987b6ce926c2e]
+              subject: 63da8767c9ad4c9a0b0eacd3
+              category: 63525e23bf163f5ea609ff2b
+              status: active
+              FAQ: []
+      responses:
+        204:
+          description: No Content
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 403
+                code: FORBIDDEN
+                message: You do not have permission to perform this action.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Offer with the specified id was not found.
+    delete:
+      security:
+        - cookieAuth: []
+      tags:
+        - Offers
+      summary: Find and delete offer by ID
+      description: Deletes an offer with the specified ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the offer that needs to be deleted
+          type: string
+      responses:
+        204:
+          description: No Content
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 403
+                code: FORBIDDEN
+                message: You do not have permission to perform this action.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Offer with the specified id was not found.
