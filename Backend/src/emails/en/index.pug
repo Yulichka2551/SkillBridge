@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        style
+            include ../css/index.css
+    body
+        header
+            img(src='https://SkillBridge582.blob.core.windows.net/SkillBridge/logo.png', alt="SkillBridge Logo")
+            block title
+            block description
+        main
+            .info 
+                div
+                p This is an automated email. Do not reply to this. You received this email because you are registered with
+                    a #{email}
+                    |  at <br/> SkillBridge
+        footer
+            h3 SkillBridge
+            p &copy; 2022 SkillBridge. All rights reserved.

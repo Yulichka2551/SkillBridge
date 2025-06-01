@@ -1,0 +1,126 @@
+definitions:
+  attachments:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: string
+        fileName:
+          type: string
+        description:
+          type: string
+        link:
+          type: string
+        size:
+          type: number
+        category:
+          type: string
+          ref: '#/definitions/resourcesCategory'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  attachmentBody:
+    type: object
+    properties:
+      fileName:
+        type: string
+      link:
+        type: string
+      description:
+        type: string
+      size:
+        type: number
+      category:
+        type: string
+        ref: '#/definitions/resourcesCategory'
+  attachment:
+    type: object
+    properties:
+      _id:
+        type: string
+      fileName:
+        type: string
+      description:
+        type: string
+      link:
+        type: string
+      size:
+        type: number
+      category:
+        type: string
+        ref: '#/definitions/resourcesCategory'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  cooperationAttachment:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      fileName:
+        type: string
+      link:
+        type: string
+      size:
+        type: number
+      category:
+        type: string
+        default: null
+        nullable: true
+      description:
+        type: string
+  attachmentInPostLesson:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      fileName:
+        type: string
+      link:
+        type: string
+      category:
+        $ref: '#/definitions/categoryWithName'
+      resourceType:
+        $ref: '#/definitions/resourceType'
+      size:
+        type: number
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  attachmentInLessonById:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      fileName:
+        type: string
+      link:
+        type: string
+      category:
+        type: string
+      resourceType:
+        $ref: '#/definitions/resourceType'
+      size:
+        type: number
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time

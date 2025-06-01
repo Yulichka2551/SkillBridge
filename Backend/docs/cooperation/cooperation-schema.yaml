@@ -1,0 +1,340 @@
+definitions:
+  cooperations:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: string
+        offer:
+          $ref: '#/definitions/offerInCooperations'
+        initiator:
+          type: string
+        initiatorRole:
+          $ref: '#/definitions/baseUserRoleEnum'
+        receiver:
+          type: string
+        receiverRole:
+          $ref: '#/definitions/baseUserRoleEnum'
+        title:
+          type: string
+        additionalInfo:
+          type: string
+        proficiencyLevel:
+          $ref: '#/definitions/proficiencyLevelEnum'
+        price:
+          type: number
+        status:
+          $ref: '#/definitions/cooperationStatusEnum'
+        needAction:
+          $ref: '#/definitions/baseUserRoleEnum'
+        availableQuizzes:
+          type: array
+          items:
+            type: string
+        finishedQuizzes:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/definitions/userInCooperations'
+  cooperation:
+    type: object
+    properties:
+      _id:
+        type: string
+      offer:
+        $ref: '#/definitions/offerInCooperationExtended'
+      initiator:
+        $ref: '#/definitions/userInCooperationsExtended'
+      initiatorRole:
+        $ref: '#/definitions/baseUserRoleEnum'
+      receiver:
+        $ref: '#/definitions/userInCooperationsExtended'
+      receiverRole:
+        $ref: '#/definitions/baseUserRoleEnum'
+      title:
+        type: string
+      additionalInfo:
+        type: string
+      proficiencyLevel:
+        $ref: '#/definitions/proficiencyLevelEnum'
+      price:
+        type: number
+      status:
+        $ref: '#/definitions/cooperationStatusEnum'
+      needAction:
+        $ref: '#/definitions/baseUserRoleEnum'
+      availableQuizzes:
+        type: array
+        items:
+          type: string
+      finishedQuizzes:
+        type: array
+        items:
+          type: string
+      sections:
+        type: array
+        items:
+          $ref: '#/definitions/section'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  cooperationBody:
+    type: object
+    properties:
+      offer:
+        type: string
+      receiver:
+        type: string
+      receiverRole:
+        $ref: '#/definitions/baseUserRoleEnum'
+      price:
+        type: number
+      title:
+        type: string
+      additionalInfo:
+        type: string
+        minLength: 30
+        maxLength: 1000
+      proficiencyLevel:
+        $ref: '#/definitions/proficiencyLevelEnum'
+      sections:
+        type: array
+        items:
+          $ref: '#/definitions/section'
+    required:
+      - title
+      - offer
+      - receiver
+      - proficiencyLevel
+      - receiverRole
+      - price
+  section:
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      resources:
+        type: array
+        items:
+          type: object
+          properties:
+            resource:
+              type: object
+              oneOf:
+                - $ref: '#/definitions/cooperationLesson'
+                - $ref: '#/definitions/cooperationQuiz'
+                - $ref: '#/definitions/cooperationAttachment'
+                - $ref: '#/definitions/question'
+            resourceType:
+              $ref: '#/definitions/resourceType'
+            availability:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - open
+                    - closed
+                    - openFrom
+                  default: open
+                date:
+                  type: string
+                  format: date-time
+                  default: null
+                  nullable: true
+            completionStatus:
+              $ref: '#/definitions/completionStatus'
+  completionStatus:
+    type: string
+    enum:
+      - completed
+      - active
+  cooperationStatusEnum:
+    type: string
+    enum:
+      - pending
+      - active
+      - declined
+      - closed
+      - request to close
+  resourceType:
+    type: string
+    enum:
+      - lesson
+      - quiz
+      - attachment
+      - question
+  userInCooperations:
+    type: object
+    properties:
+      _id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      photo:
+        type: string
+      role:
+        $ref: '#/definitions/baseUserRoleEnum'
+  userInCooperationsExtended:
+    type: object
+    properties:
+      _id:
+        type: string
+      role:
+        type: array
+        items:
+          $ref: '#/definitions/baseUserRoleEnum'
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      mainSubjects:
+        type: object
+        properties:
+          student:
+            type: array
+            items:
+              $ref: '#/definitions/userMainSubjects'
+          tutor:
+            type: array
+            items:
+              $ref: '#/definitions/userMainSubjects'
+      totalReviews:
+        $ref: '#/definitions/userTotalReviews'
+      averageRating:
+        $ref: '#/definitions/userAverageRating'
+      nativeLanguage:
+        $ref: '#/definitions/userSpokenLanguagesEnum'
+      lastLogin:
+        type: string
+        format: date-time
+      status:
+        $ref: '#/definitions/roleBasedStatus'
+      professionalBlock:
+        $ref: '#/definitions/userProfessionalBlock'
+      notificationSettings:
+        $ref: '#/definitions/userNotificationSettings'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      address:
+        $ref: '#/definitions/userAddress'
+      photo:
+        type: string
+      professionalSummary:
+        type: string
+      lastSeen:
+        type: string
+        format: date-time
+  offerInCooperations:
+    type: object
+    properties:
+      _id:
+        type: string
+      price:
+        type: number
+      title:
+        type: string
+      subject:
+        $ref: '#/definitions/subjectWithName'
+      category:
+        $ref: '#/definitions/categoryWithAppearance'
+  offerInCooperationExtended:
+    type: object
+    properties:
+      _id:
+        type: string
+      proficiencyLevel:
+        $ref: '#/definitions/offerProficiencyLevelValues'
+      title:
+        type: string
+      description:
+        type: string
+      languages:
+        $ref: '#/definitions/offerLanguagesValues'
+      author:
+        $ref: '#/definitions/offerAuthor'
+      subject:
+        $ref: '#/definitions/subjectWithName'
+      category:
+        $ref: '#/definitions/categoryWithNameAppearance'
+  cooperationLesson:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      content:
+        type: string
+      attachments:
+        type: array
+        items:
+          type: string
+      category:
+        type: string
+        nullable: true
+        default: null
+      isDuplicate:
+        type: boolean
+  cooperationQuiz:
+    type: object
+    properties:
+      _id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      items:
+        type: array
+        items:
+          type: string
+      author:
+        type: string
+      category:
+        type: string
+        nullable: true
+        default: null
+      isDuplicate:
+        type: boolean
+      settings:
+        type: object
+        properties:
+          view:
+            type: string
+            enum:
+              - Stepper
+              - Scroll
+          shuffle:
+            type: boolean
+          pointValues:
+            type: boolean
+          scoredResponses:
+            type: boolean
+          correctAnswers:
+            type: boolean

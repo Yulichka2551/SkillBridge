@@ -1,0 +1,96 @@
+definitions:
+  notifications:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        userRole:
+          type: string
+          enum:
+            - Student
+            - Tutor
+            - Admin
+            - Superadmin
+        type:
+          type: string
+          enum:
+            - Review
+            - Comment
+        reference:
+          oneOf:
+            - $ref: '#/components/schemas/Review'
+            - $ref: '#/components/schemas/Comment'
+        referenceModel:
+          type: string
+          enum:
+            - Review
+            - Comment
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+  notification:
+    type: object
+    properties:
+      _id:
+        type: string
+      user:
+        $ref: '#/components/schemas/user'
+      userRole:
+        type: string
+        enum:
+          - Student
+          - Tutor
+          - Admin
+          - Superadmin
+      type:
+        type: string
+        enum:
+          - Review
+          - Comment
+      reference:
+        oneOf:
+          - $ref: '#/components/schemas/Review'
+          - $ref: '#/components/schemas/Comment'
+      referenceModel:
+        type: string
+        enum:
+          - Review
+          - Comment
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string

@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+@use 'node_modules/normalize-scss/sass/normalize' as *;
+
+@include normalize();
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+
+  // font-weight: $font-weight-base;
+  // line-height: $line-height-base; //breaks current styles in the app
+  // letter-spacing: $letter-spacing-base;
+}

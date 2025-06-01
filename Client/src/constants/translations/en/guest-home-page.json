@@ -1,0 +1,93 @@
+{
+  "welcomeBlock": {
+    "title": "The secret of getting ahead is getting started",
+    "description": "An educational platform that provides access to professional courses, helping students master key skills for career success",
+    "getStarted": "Get started for free",
+    "title1": "LEARN WITHOUT LIMITS",
+    "subtitle1": "With SkillBridge, you gain access to knowledge from anywhere in the world. All you need is the desire to grow!",
+    "title2": "FLEXIBLE SCHEDULE",
+    "subtitle2": "Learn at your own convenience: stop when you need to and continue when you're ready. Your pace – your rules.",
+    "title3": "THE PERFECT TEACHER FOR YOU",
+    "subtitle3": "Choose a mentor based on your needs. A wide range of specialists will help you find the perfect combination of teaching style and methodology.",
+    "title4": "COMMUNICATE AND COLLABORATE",
+    "subtitle4": "Exchange experiences not only with instructors but also with other students. Make new connections, find like-minded people, and expand your horizons of knowledge!"
+  },
+  "accordion": {
+    "flexibleLocation": {
+      "title": "Flexible Location",
+      "description": "SkillBridge platform has no boundaries and can be used anywhere in the world, all you need is aspiration."
+    },
+    "individualTime": {
+      "title": "Individual Time",
+      "description": "SkillBridge platform provides the opportunity to study lessons at any time convenient for you, pause and continue again."
+    },
+    "freeChoiceOfTeachers": {
+      "title": "Free Choice of Tutors",
+      "description": "SkillBridge platform has a wide range of criteria and will help you find the best tutor for education."
+    },
+    "digitalCommunication": {
+      "title": "Digital Communication",
+      "description": "SkillBridge platform offers extensive opportunities for meaningful communication not only with tutors but also with students."
+    }
+  },
+  "whatCanYouDo": {
+    "title": "What's available to you",
+    "description": "If you need a qualified mentor or want to share your own knowledge, this place is the perfect place to start.",
+    "learn": {
+      "title": "Learn from professionals",
+      "description": "The path to confidence and knowledge becomes much shorter when you have an experienced mentor nearby. Their practical experience will help you master what you need faster. Don't delay - take the first step today! 🚀",
+      "actionLabel": "Become a student"
+    },
+    "teach": {
+      "title": "Become a source of inspiration",
+      "description": "Your experience can be the key to success for someone else. Help students find their way to their goal by passing on valuable knowledge. Don't miss the chance to change someone's future 🌱",
+      "actionLabel": "Become a tutor"
+    }
+  },
+  "howItWorks": {
+    "title": "How everything is arranged",
+    "description": "Registration will only take a few minutes. Just enter your email or use your Google account - and you're ready to go",
+    "learnFromExperts": "Learn from those who inspire",
+    "shareYourExperience": "Share your knowledge with those who aspire",
+    "student": {
+      "signUp": {
+        "title": "Create an account",
+        "description": "Registration will only take a few minutes. Just enter your email or use your Google account - and you're ready to go"
+      },
+      "selectATutor": {
+        "title": "Choose a tutor",
+        "description": "It's easy to find a tutor: select a subject from the catalog or enter a name in the search bar. Check out their profiles and reviews - and make your choice."
+      },
+      "sendRequest": {
+        "title": "Send a request",
+        "description": "You've chosen a tutor? Great! Indicate your level of training, agree on the price - and wait for a response."
+      },
+      "startLearning": {
+        "title": "Start learning",
+        "description": "After confirming your request, you will have access to classes, materials and other opportunities for comfortable learning."
+      }
+    },
+    "tutor": {
+      "signUp": {
+        "title": "Create an account",
+        "description": "Registration will only take a few minutes. Just enter your email or use your Google account - and you're ready to go."
+      },
+      "createATutorAccount": {
+        "title": "Register a tutor profile",
+        "description": "Choose a subject, prepare materials and create your unique teaching ad."
+      },
+      "getNewStudents": {
+        "title": "Meet new students",
+        "description": "Develop communication, adapt your approach to each person - and build quality learning together."
+      },
+      "receiveFeedbacks": {
+        "title": "Get recognized",
+        "description": "Collect positive feedback, increase your rating and attract more students who appreciate your professionalism."
+      }
+    }
+  },
+  "whoWeAre": {
+    "title": "Who we are",
+    "description": "SkillBridge is a space where knowledge is brought together. Here, experts can share their expertise, and those who want to learn can find a mentor or course that suits them. The platform is designed for convenient and transparent cooperation: no fees for classes, only direct communication between the teacher and the student. Affordable education is actually closer than it seems."
+  }
+}

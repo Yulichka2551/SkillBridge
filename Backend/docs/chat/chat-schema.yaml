@@ -1,0 +1,53 @@
+definitions:
+  chatBody:
+    type: object
+    properties:
+      member:
+        type: string
+      memberRole:
+        type: string
+  chat:
+    type: object
+    properties:
+      _id:
+        type: string
+      members:
+        type: object
+        properties:
+          user:
+            $ref: '#/definitions/userChatMember'
+          role:
+            type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      deletedFor:
+        type: array
+        items:
+          type: object
+          properties:
+            user:
+              type: string
+      latestMessage:
+        $ref: '#/definitions/message'
+        nullable: true
+  chats:
+    type: array
+    items:
+      $ref: '#/definitions/chat'
+  userChatMember:
+    type: object
+    properties:
+      _id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      photo:
+        type: string
+      professionalSummary:
+        type: string

@@ -1,0 +1,42 @@
+definitions:
+  notes:
+    type: array
+    items:
+      $ref: '#/definitions/note'
+  noteBody:
+    type: object
+    properties:
+      text:
+        type: string
+      isPrivate:
+        type: boolean
+  note:
+    type: object
+    properties:
+      _id:
+        type: string
+      text:
+        type: string
+      author:
+        $ref: '#/definitions/userInNote'
+      isPrivate:
+        type: boolean
+      cooperation:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  userInNote:
+    type: object
+    properties:
+      _id:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      photo:
+        type: string

@@ -1,0 +1,71 @@
+definitions:
+  baseLesson:
+    type: object
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      content:
+        type: string
+      category:
+        $ref: '#/definitions/categoryWithName'
+      resourceType:
+        $ref: '#/definitions/resourceType'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  lesson:
+    type: object
+    allOf:
+      - $ref: '#/definitions/baseLesson'
+      - type: object
+        properties:
+          attachments:
+            type: array
+            items:
+              type: string
+  lessonById:
+    type: object
+    allOf:
+      - $ref: '#/definitions/baseLesson'
+      - type: object
+        properties:
+          attachments:
+            type: array
+            items:
+              $ref: '#/definitions/attachmentInLessonById'
+  lessons:
+    type: object
+    properties:
+      count:
+        type: number
+      items:
+        $ref: '#/definitions/lesson'
+  postLessonBody:
+    type: object
+    properties:
+      title:
+        type: string
+        minLength: 1
+        maxLength: 100
+      description:
+        type: string
+        minLength: 1
+        maxLength: 1000
+      content:
+        type: string
+        minLength: 50
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/attachmentInPostLesson'
+      category:
+        type: string

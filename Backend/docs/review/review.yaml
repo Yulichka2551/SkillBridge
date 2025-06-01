@@ -1,0 +1,406 @@
+paths:
+  /reviews:
+    get:
+      security:
+        - cookieAuth: []
+      tags:
+        - Reviews
+      summary: Retrieve reviews based on criteria or all reviews.
+      description: Find all reviews that match the specified criteria or all reviews if no criteria is provided.
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: user
+          schema:
+            type: string
+        - in: query
+          name: role
+          schema:
+            type: string
+        - in: query
+          name: rating
+          schema:
+            type: integer
+        - in: query
+          name: skip
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/reviewResponse'
+              example:
+                count: 2
+                reviews:
+                  - _id: 6255bc080a75adf9223df100
+                    comment: Not bad
+                    rating: 4
+                    author:
+                      _id: 6255bc080a75adf9223df100
+                      firstName: John
+                      lastName: Doe
+                      photo: john-doe-photo.jpg
+                    targetUserId: 6255bc080a75adf9223df212
+                    targetUserRole: tutor
+                    offer:
+                      _id: 63ebc6fbd2f34037d0aba791
+                      subject:
+                        _id: 6255bc080a71adf9223df134
+                        name: English
+                      category:
+                        _id: 64045f98b131dd04d7896af6
+                        name: languages
+                    proficiencyLevel: Beginner
+                    createdAt: 2022-10-18T13:25:36.292Z
+                    updatedAt: 2022-10-18T13:25:36.292Z
+                  - _id: 8755bc080a00adr9243df104
+                    comment: Best tutor!
+                    rating: 5
+                    author:
+                      _id: 6255bc080a75adf9223df211
+                      firstName: John
+                      lastName: Doe
+                      photo: john-duglas-photo.jpg
+                    targetUserId: 6255bc080a75adf9223df212
+                    targetUserRole: tutor
+                    offer:
+                      _id: 63ebc6fbd2f34037d0aba79
+                      subject:
+                        _id: 6255bc080a71adf9222df134
+                        name: English
+                      category:
+                        _id: 64045f98b131dd04d7896af6
+                        name: languages
+                    proficiencyLevel: Advanced
+                    createdAt: 2022-10-18T13:25:36.292Z
+                    updatedAt: 2022-10-18T13:25:36.292Z
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+    post:
+      security:
+        - cookieAuth: []
+      tags:
+        - Reviews
+      summary: Create new review.
+      description: Saves a new review the DB.
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        description: Create new review.
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/reviewPostBody'
+            example:
+              comment: Best tutor!
+              rating: 5
+              targetUserId: 6255bc080a75adf9223df212
+              targetUserRole: tutor
+              offer: 63ebc6fbd2f34037d0aba791
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/review'
+              example:
+                _id: 6255bc080a75adf9223df100
+                comment: Not bad
+                rating: 4
+                author:
+                  _id: 6255bc080a75adf9223df100
+                  firstName: John
+                  lastName: Doe
+                  photo: john-doe-photo.jpg
+                targetUserId: 6255bc080a75adf9223df212
+                targetUserRole: tutor
+                offer:
+                  _id: 63ebc6fbd2f34037d0aba791
+                  subject:
+                    _id: 6255bc080a71adf9223df134
+                    name: English
+                  category:
+                    _id: 64045f98b131dd04d7896af6
+                    name: languages
+                proficiencyLevel: Beginner
+                createdAt: 2022-10-18T13:25:36.292Z
+                updatedAt: 2022-10-18T13:25:36.292Z
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: CANNOT_TARGET_SELF
+                message: You cannot perform this action on yourself.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Offer with the specified ID was not found.
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 422
+                code: FIELD_IS_NOT_IN_RANGE
+                message: rating should be in range from 1 to 5.
+  /reviews/{id}:
+    get:
+      security:
+        - cookieAuth: []
+      tags:
+        - Reviews
+      summary: Find review by ID
+      description: Finds and returns a reviews with the specified ID.
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the review that needs to be fetched
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/review'
+              example:
+                _id: 6255bc080a75adf9223df100
+                comment: Not bad
+                rating: 4
+                author:
+                  _id: 6255bc080a75adf9223df100
+                  firstName: John
+                  lastName: Doe
+                  photo: john-doe-photo.jpg
+                targetUserId: 6255bc080a75adf9223df212
+                targetUserRole: tutor
+                offer:
+                  _id: 63ebc6fbd2f34037d0aba791
+                  subject:
+                    _id: 6255bc080a71adf9223df134
+                    name: English
+                  category:
+                    _id: 64045f98b131dd04d7896af6
+                    name: languages
+                proficiencyLevel: Beginner
+                createdAt: 2022-10-18T13:25:36.292Z
+                updatedAt: 2022-10-18T13:25:36.292Z
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Review with the specified id was not found.
+    patch:
+      security:
+        - cookieAuth: []
+      tags:
+        - Reviews
+      summary: Update review by ID
+      description: Finds and updates a review with the specified ID.
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Review ID
+          type: string
+      requestBody:
+        required: true
+        description: Provide required data to update a review.
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/reviewPatchBody'
+            example:
+              comment: Best tutor!
+              rating: 5
+      responses:
+        204:
+          description: No Content
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 403
+                code: FORBIDDEN
+                message: You do not have permission to perform this action.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Review with the specified id was not found.
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 422
+                code: FIELD_IS_NOT_IN_RANGE
+                message: rating should be in range from 1 to 5.
+    delete:
+      security:
+        - cookieAuth: []
+      tags:
+        - Reviews
+      summary: Find and delete review by ID
+      description: Finds and deletes a review with the specified ID.
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the review that needs to be deleted
+          type: string
+      responses:
+        204:
+          description: No Content
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 400
+                code: INVALID_ID
+                message: ID is invalid.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 401
+                code: UNAUTHORIZED
+                message: The requested URL requires user authorization.
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 403
+                code: FORBIDDEN
+                message: You do not have permission to perform this action.
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/Error'
+              example:
+                status: 404
+                code: DOCUMENT_NOT_FOUND
+                message: Review with the specified id was not found.

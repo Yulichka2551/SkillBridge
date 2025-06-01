@@ -1,0 +1,207 @@
+.calendar-wrapper {
+  position: relative;
+  margin: 50px auto;
+  max-width: 1600px;
+  height: 600px;
+}
+
+.event-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background-color: #fdfdfd;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-panel h3 {
+  margin-top: 0;
+}
+
+.event-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.event-panel label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #444;
+}
+
+.event-panel input,
+.event-panel textarea {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.event-panel textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.event-actions button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.event-actions button[type='button'] {
+  background-color: #f44336;
+}
+
+.event-actions button:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rbc-btn {
+  background-color: rgb(120, 120, 192);
+  color: #413b90;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.rbc-btn:hover {
+  background-color: rgb(160, 160, 255);
+}
+
+.rbc-btn-group {
+  margin: 0 10px;
+  font-family: 'Montserrat, sans-serif !important';
+}
+
+.rbc-btn-group button.rbc-active {
+  background-color: rgb(71, 71, 129) !important;
+  color: white !important;
+  font-family: 'Montserrat, sans-serif !important';
+}
+
+.rbc-btn-group button {
+  background-color: rgb(161, 161, 253);
+  color: #413b90;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 1px solid rgb(214, 214, 214);
+  font-family: 'Montserrat, sans-serif !important';
+}
+
+.rbc-btn-group button:hover {
+  background-color: rgb(129, 129, 250);
+}
+
+.rbc-today {
+  border: 2px solid #2959b3;
+  background-color: #5590fd59;
+}
+
+.rbc-month-view .rbc-date-cell.rbc-now {
+  background-color: #608cdf;
+  font-weight: bold;
+}
+
+.rbc-toolbar button:focus,
+.rbc-toolbar button:active {
+  background-color: rgb(71, 71, 129) !important;
+  color: white !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.event-details-panel {
+  background-color: #f4f4f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  width: 30%;
+  margin-left: 20px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.event-details-panel h3 {
+  color: #413b90;
+  font-size: 1.5rem;
+}
+
+.event-details-panel p {
+  color: #555;
+  font-size: 1rem;
+}
+
+.event-details-panel button {
+  background-color: #413b90;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.event-details-panel button:hover {
+  background-color: #2f2a74;
+}
+
+.rbc-event:hover::after {
+  content: attr(data-info);
+  position: absolute;
+  top: -50px; /* Відстань, на яку буде піднято блок інформації */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+/* Стилі для панелі редагування */
+.event-details-panel {
+  position: absolute;
+  top: 5%;
+  left: 70%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}

@@ -1,0 +1,115 @@
+import Box from '@mui/material/Box'
+import { FC, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import useForm from '~/hooks/use-form'
+import { useDebounce } from '~/hooks/use-debounce'
+import { useAppDispatch, useAppSelector } from '~/hooks/use-redux'
+
+import TitleWithDescription from '~/components/title-with-description/TitleWithDescription'
+import { validations } from '~/components/user-steps-wrapper/constants'
+import ProfileTabForm from '~/containers/edit-profile/profile-tab/profile-tab-form/ProfileTabForm'
+import {
+  updateProfileData,
+  updateValidityStatus
+} from '~/redux/features/editProfileSlice'
+import { EditProfileForm, MainUserRole } from '~/types'
+import { styles } from '~/containers/edit-profile/profile-tab/ProfileTab.styles'
+import { Typography } from '@mui/material'
+
+const ProfileTab: FC = () => {
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+  const { userRole } = useAppSelector((state) => state.appMain)
+  const {
+    city,
+    country,
+    firstName,
+    lastName,
+    nativeLanguage,
+    photo,
+    professionalSummary,
+    videoLink
+  } = useAppSelector((state) => state.editProfile)
+
+  const initialValues: EditProfileForm = {
+    city,
+    country,
+    firstName,
+    lastName,
+    nativeLanguage,
+    photo: photo ?? '',
+    professionalSummary: professionalSummary || '',
+    videoLink:
+      typeof videoLink === 'string'
+        ? videoLink
+        : videoLink?.[userRole as MainUserRole] ?? ''
+  }
+
+  const {
+    isValid,
+    handleInputChange,
+    handleBlur,
+    handleNonInputValueChange,
+    trigger,
+    data,
+    errors
+  } = useForm<EditProfileForm>({
+    initialValues,
+    validations
+  })
+
+  const debouncedUpdateProfileData = useDebounce(() => {
+    void dispatch(updateProfileData(data))
+  }, 300)
+
+  useEffect(() => {
+    debouncedUpdateProfileData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data])
+
+  useEffect(() => {
+    trigger()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    void dispatch(updateValidityStatus({ tab: 'profileTab', value: isValid }))
+  }, [isValid, dispatch])
+
+  return (
+    <Box sx={styles.profileInnerContainer}>
+      <Box sx={styles.root}>
+        <Typography
+          sx={{
+            color: '#413B90',
+            fontFamily: 'Montserrat, sans-serif !important',
+            fontWeight: 'bold',
+            fontSize: '20px'
+          }}
+        >
+          {t('editProfilePage.profile.title')}
+        </Typography>
+        <Typography
+          sx={{
+            color: 'rgb(118, 110, 226)',
+            fontFamily: 'Montserrat, sans-serif !important',
+            fontSize: '16px'
+          }}
+        >
+          {t('editProfilePage.profile.description')}
+        </Typography>
+
+        <ProfileTabForm
+          data={data}
+          errors={errors}
+          handleBlur={handleBlur}
+          handleInputChange={handleInputChange}
+          handleNonInputValueChange={handleNonInputValueChange}
+        />
+      </Box>
+    </Box>
+  )
+}
+
+export default ProfileTab
